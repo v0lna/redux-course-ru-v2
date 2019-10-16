@@ -1,4 +1,4 @@
-const CHANGE_YEAR = "changeYear"
+export const CHANGE_YEAR = "changeYear"
 
 export function setYear(year) {
   return {

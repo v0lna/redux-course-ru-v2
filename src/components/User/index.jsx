@@ -9,7 +9,7 @@ export default class index extends Component {
   render() {
     const { name } = this.props
     return (
-      <div>
+      <div className="ib user">
         <p>Привет, {name} !</p>
       </div>
     )

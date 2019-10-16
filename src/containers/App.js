@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 
-import User from "./User"
-import Page from "./Page"
+import User from "../components/User"
+import Page from "../components/Page"
 import { setYear } from "../actions/PageAction"
 
 import "./App.css"
@@ -15,7 +15,7 @@ class App extends Component {
     const { setYearAction } = this.props
 
     return (
-      <div className="App">
+      <div className="row">
         <header className="App-header">
           <h1 className="App-title">Мой топ фото</h1>
         </header>
