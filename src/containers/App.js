@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 
 import User from "../components/User"
 import Page from "../components/Page"
-import { setYear } from "../actions/PageAction"
+import { getPhotos } from "../actions/PageAction"
 
 import "./App.css"
 
@@ -11,8 +11,8 @@ class App extends Component {
   render() {
     // const { name, surname, age } = this.props.user
     const { name } = this.props.user
-    const { year, photos } = this.props.page
-    const { setYearAction } = this.props
+    const { year, photos, loading } = this.props.page
+    const { getPhotosAction } = this.props
 
     return (
       <div className="row">
@@ -21,14 +21,18 @@ class App extends Component {
         </header>
         <p className="App-intro">Здесь будут мои самые залайканые фото</p>
         <User name={name}></User>
-        <Page year={year} photos={photos} setYear={setYearAction}></Page>
+        <Page
+          year={year}
+          photos={photos}
+          getPhotos={getPhotosAction}
+          loading={loading}
+        ></Page>
       </div>
     )
   }
 }
 
 const mapStateToProps = store => {
-  console.log(store)
   return {
     user: store.user,
     page: store.page,
@@ -36,9 +40,8 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = dispatch => {
-  console.log(dispatch)
   return {
-    setYearAction: year => dispatch(setYear(year)),
+    getPhotosAction: year => dispatch(getPhotos(year)),
   }
 }
 

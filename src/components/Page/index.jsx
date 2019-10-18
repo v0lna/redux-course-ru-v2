@@ -5,40 +5,40 @@ export default class index extends Component {
   static propTypes = {
     year: PropTypes.number.isRequired,
     photos: PropTypes.array.isRequired,
-    setYear: PropTypes.func.isRequired,
+    getPhotos: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
   }
 
   // constructor(props){
   //   super(props)
   // }
 
-  onBtnClick = e => {
+  onBtnClickGetPhotos = e => {
     const year = +e.currentTarget.innerText
-    this.props.setYear(year)
+    this.props.getPhotos(year)
   }
 
   render() {
-    const { year, photos } = this.props
+    const { year, photos, loading } = this.props
     return (
       <div className="ib page">
-        <button className="btn" onClick={this.onBtnClick}>
+        <button className="btn" onClick={this.onBtnClickGetPhotos}>
           2015
         </button>
-        <button className="btn" onClick={this.onBtnClick}>
+        <button className="btn" onClick={this.onBtnClickGetPhotos}>
           2016
         </button>
-        <button className="btn" onClick={this.onBtnClick}>
+        <button className="btn" onClick={this.onBtnClickGetPhotos}>
           2017
         </button>
-        <button className="btn" onClick={this.onBtnClick}>
+        <button className="btn" onClick={this.onBtnClickGetPhotos}>
           2018
         </button>
-        <button className="btn" onClick={this.onBtnClick}>
+        <button className="btn" onClick={this.onBtnClickGetPhotos}>
           2019
         </button>
-        <p>
-          У тебя {photos.length} фото за {year} год
-        </p>
+        <p>{year} год</p>
+        {loading ? <p> Загрузка...</p> : <p>У тебя {photos.length} фото</p>}
       </div>
     )
   }
