@@ -6,11 +6,29 @@ export default class index extends Component {
     name: PropTypes.string.isRequired,
   }
 
+  onLogBtnClick = () => {
+    this.props.handleLogin()
+  }
+
   render() {
-    const { name } = this.props
+    const { name, userFetchStatus, error } = this.props
+
     return (
       <div className="ib user">
-        <p>Привет, {name} !</p>
+        {/* <div
+          className="fb-login-button"
+          data-width=""
+          data-size="large"
+          data-button-type="login_with"
+          data-auto-logout-link="false"
+          data-use-continue-as="false"
+          // onClick={this.onLogBtnClick}
+        ></div> */}
+        <button className="btn" onClick={this.onLogBtnClick}>
+          Вход через FB
+        </button>
+        {userFetchStatus ? <p>Loading...</p> : <p>Привет, {name} !</p>}
+        {error ? <p>Error :( </p> : null}
       </div>
     )
   }

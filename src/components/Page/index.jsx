@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import style from "./style.module.css"
 
 export default class index extends Component {
   static propTypes = {
-    year: PropTypes.number.isRequired,
     photos: PropTypes.array.isRequired,
     getPhotos: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
@@ -14,31 +14,23 @@ export default class index extends Component {
   // }
 
   onBtnClickGetPhotos = e => {
-    const year = +e.currentTarget.innerText
-    this.props.getPhotos(year)
+    this.props.getPhotos()
   }
 
   render() {
-    const { year, photos, loading } = this.props
+    const { photos, loading } = this.props
     return (
       <div className="ib page">
         <button className="btn" onClick={this.onBtnClickGetPhotos}>
-          2015
+          Загрузить фотографии
         </button>
-        <button className="btn" onClick={this.onBtnClickGetPhotos}>
-          2016
-        </button>
-        <button className="btn" onClick={this.onBtnClickGetPhotos}>
-          2017
-        </button>
-        <button className="btn" onClick={this.onBtnClickGetPhotos}>
-          2018
-        </button>
-        <button className="btn" onClick={this.onBtnClickGetPhotos}>
-          2019
-        </button>
-        <p>{year} год</p>
+
         {loading ? <p> Загрузка...</p> : <p>У тебя {photos.length} фото</p>}
+        <div className={style.photoContainer}>
+          {photos.map(el => {
+            return <img className={style.photo} src={el} key={el} alt="your img"></img>
+          })}
+        </div>
       </div>
     )
   }

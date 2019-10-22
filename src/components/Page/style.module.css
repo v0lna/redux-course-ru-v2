@@ -1,0 +1,6 @@
+.photoContainer {
+  display: flex;
+}
+.photo {
+  margin-right: 5px;
+}
