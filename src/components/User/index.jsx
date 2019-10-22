@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-
+import "../App.css"
 export default class index extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,

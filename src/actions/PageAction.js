@@ -11,14 +11,21 @@ export function getPhotos() {
       "/me?fields=albums.limit(5){name,count,cover_photo{picture},photos.limit(10){picture,images}}",
       response => {
         // FB.api('/me?fields=albums.limit(5){name,count,cover_photo{picture}}', response => {
-        // console.log(response)
+        console.log(response)
 
         response.albums.data.forEach(el => {
           let photo = []
           el.photos.data.forEach(item => {
-            photo = item.images.filter(element => element.height === 320)
+            photo = [
+              ...photo,
+              ...item.images.filter(element => element.height === 225),
+            ]
           })
-          fbAlbum.push(photo[0].source)
+          photo.forEach(item => {
+            console.log(item)
+            fbAlbum.push(item.source)
+          })
+          // console.log(fbAlbum)
         })
         dispatch({
           type: GET_PHOTOS_SUCCESS,

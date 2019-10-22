@@ -62,6 +62,8 @@ h3 {
 }
 .page {
   width: 80%;
+  margin: 0, auto;
+  margin-bottom: 5px;
 }
 .user {
   width: 20%;

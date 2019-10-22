@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import style from "./style.module.css"
+// import "../App.css"
 
 export default class index extends Component {
   static propTypes = {
@@ -20,18 +21,26 @@ export default class index extends Component {
   render() {
     const { photos, loading } = this.props
     return (
-      <div className="ib page">
-        <button className="btn" onClick={this.onBtnClickGetPhotos}>
-          Загрузить фотографии
-        </button>
-
-        {loading ? <p> Загрузка...</p> : <p>У тебя {photos.length} фото</p>}
+      <>
+        <div className="ib page">
+          <button className="btn" onClick={this.onBtnClickGetPhotos}>
+            Загрузить фотографии
+          </button>
+          {loading ? <p> Загрузка...</p> : <p>У тебя {photos.length} фото</p>}
+        </div>
         <div className={style.photoContainer}>
           {photos.map(el => {
-            return <img className={style.photo} src={el} key={el} alt="your img"></img>
+            return (
+              <img
+                className={style.photo}
+                src={el}
+                key={el}
+                alt="your img"
+              ></img>
+            )
           })}
         </div>
-      </div>
+      </>
     )
   }
 }
