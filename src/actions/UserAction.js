@@ -1,6 +1,8 @@
 export const LOGIN_REQUEST = "LOGIN_REQUEST"
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGIN_ERROR = "LOGIN_ERROR"
+export const LOGOUT_REQUEST = "LOGOUT_REQUEST"
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
 
 export function handleLogin() {
   return dispatch => {
@@ -25,5 +27,22 @@ export function handleLogin() {
         return_scopes: true,
       }
     )
+  }
+}
+
+export function fbLogoutUser() {
+  return dispatch => {
+    dispatch({ type: LOGOUT_REQUEST })
+    //eslint-disable-next-line no-undef
+    // FB.getLoginStatus(function(response) {
+    //   if (response && response.status === "connected") {
+
+    //   }
+    // })
+    //eslint-disable-next-line no-undef
+    FB.logout(function() {
+      document.location.reload()
+      dispatch({ type: LOGOUT_SUCCESS })
+    })
   }
 }

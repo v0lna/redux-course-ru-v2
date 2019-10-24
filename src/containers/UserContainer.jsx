@@ -2,10 +2,13 @@ import React from "react"
 import { connect } from "react-redux"
 
 import User from "../components/User"
-import { handleLogin } from "../actions/UserAction"
+import { handleLogin, fbLogoutUser } from "../actions/UserAction"
 
-function UserContainer({ user: { name, error, userFetchStatus }, login }) {
-  console.log(name, error, login)
+function UserContainer({
+  user: { name, error, userFetchStatus },
+  login,
+  logout,
+}) {
   return (
     <>
       <User
@@ -13,6 +16,7 @@ function UserContainer({ user: { name, error, userFetchStatus }, login }) {
         userFetchStatus={userFetchStatus}
         error={error}
         handleLogin={login}
+        handleLogout={logout}
       ></User>
     </>
   )
@@ -27,6 +31,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     login: () => dispatch(handleLogin()),
+    logout: () => dispatch(fbLogoutUser()),
   }
 }
 

@@ -8,7 +8,7 @@ export function getPhotos() {
     const fbAlbum = []
     //eslint-disable-next-line no-undef
     FB.api(
-      "/me?fields=albums.limit(5){name,count,cover_photo{picture},photos.limit(10){picture,images}}",
+      "/me?fields=albums.limit(5){name,count,cover_photo{picture},year,likes,photos.limit(10){picture,images}}",
       response => {
         // FB.api('/me?fields=albums.limit(5){name,count,cover_photo{picture}}', response => {
         console.log(response)
@@ -22,7 +22,8 @@ export function getPhotos() {
             ]
           })
           photo.forEach(item => {
-            console.log(item)
+            // fbAlbums [ { albumName: "Фото обложки", photos: arrayWithPhotoSrc}, {} ]
+            // console.log(item)
             fbAlbum.push(item.source)
           })
           // console.log(fbAlbum)
@@ -36,13 +37,43 @@ export function getPhotos() {
   }
 }
 
-// по клику на кнопку с номером года
-// меняется год в заголовке
-// ниже (где должны быть фото),
-//  появляется текст "Загрузка..."
-// после удачной загрузки*
-// убрать текст "Загрузка..."
-// отобразить строку:
-// "У тебя ХХ фото"
-// (зависит, от длины массива, переданного
-// в action.payload)
+export function getPhotosV2() {
+  return dispatch => {
+    dispatch({ type: GET_PHOTOS_REQUEST })
+
+    const fbAlbum = []
+    //eslint-disable-next-line no-undef
+    FB.api(
+      "/me?fields=albums.limit(5){name,count,cover_photo{picture},photos.limit(10){picture,images}}",
+      response => {
+        // FB.api('/me?fields=albums.limit(5){name,count,cover_photo{picture}}', response => {
+        // console.log(response)
+
+        response.albums.data.forEach(el => {
+          // console.log(el)
+          const obj = { albumName: el.name, photos: [] }
+          // console.log(obj)
+          let photo = []
+          el.photos.data.forEach(item => {
+            photo = [
+              ...photo,
+              ...item.images.filter(element => element.height === 225),
+            ]
+          })
+          photo.forEach(item => {
+            // fbAlbums [ { albumName: "Фото обложки", photos: arrayWithPhotoSrc}, {} ]
+            // console.log(item)
+            obj.photos = [...obj.photos, item.source]
+          })
+          fbAlbum.push(obj)
+          console.log(fbAlbum)
+          // console.log(obj)
+        })
+        dispatch({
+          type: GET_PHOTOS_SUCCESS,
+          payload: fbAlbum,
+        })
+      }
+    )
+  }
+}

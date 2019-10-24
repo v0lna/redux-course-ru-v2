@@ -1,8 +1,8 @@
 .photoContainer {
-  width: 100%;
-  margin: 5px, auto;
+  width: 90%;
+  margin: 5px auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 5px;
+  gap: 8px;
   justify-items: center;
 }

@@ -10,6 +10,10 @@ export default class index extends Component {
     this.props.handleLogin()
   }
 
+  onLogoutBtnClick = () => {
+    this.props.handleLogout()
+  }
+
   render() {
     const { name, userFetchStatus, error } = this.props
 
@@ -22,10 +26,12 @@ export default class index extends Component {
           data-button-type="login_with"
           data-auto-logout-link="false"
           data-use-continue-as="false"
-          // onClick={this.onLogBtnClick}
         ></div> */}
-        <button className="btn" onClick={this.onLogBtnClick}>
+        <button className="btn btnUser" onClick={this.onLogBtnClick}>
           Вход через FB
+        </button>
+        <button className="btn btnUser" onClick={this.onLogoutBtnClick}>
+          Выход с FB
         </button>
         {userFetchStatus ? <p>Loading...</p> : <p>Привет, {name} !</p>}
         {error ? <p>Error :( </p> : null}

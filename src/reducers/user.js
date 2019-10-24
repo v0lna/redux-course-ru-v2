@@ -2,6 +2,8 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
 } from "../actions/UserAction"
 
 export const initialState = {
@@ -32,6 +34,17 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
         error: true,
+      }
+    case LOGOUT_REQUEST:
+      return {
+        ...state,
+        userFetchStatus: true,
+      }
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        name: "Аноним",
+        userFetchStatus: false,
       }
     default:
       return state

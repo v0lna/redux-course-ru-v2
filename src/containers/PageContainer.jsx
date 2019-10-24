@@ -3,8 +3,13 @@ import { connect } from "react-redux"
 
 import Page from "../components/Page"
 import { getPhotos } from "../actions/PageAction"
+import { getPhotosV2 } from "../actions/PageAction"
 
-function PageContainer({ page: { year, photos, loading }, getPhotosAction }) {
+function PageContainer({
+  page: { year, photos, loading },
+  getPhotosAction,
+  getPhotosV2Action,
+}) {
   return (
     <>
       <Page
@@ -12,6 +17,7 @@ function PageContainer({ page: { year, photos, loading }, getPhotosAction }) {
         photos={photos}
         getPhotos={getPhotosAction}
         loading={loading}
+        getPhotosV2={getPhotosV2Action}
       ></Page>
     </>
   )
@@ -26,6 +32,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     getPhotosAction: () => dispatch(getPhotos()),
+    getPhotosV2Action: () => dispatch(getPhotosV2()),
   }
 }
 
